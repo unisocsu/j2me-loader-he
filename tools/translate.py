@@ -34,7 +34,7 @@ def check_missing_translations(base_file, target_file):
     missing_keys = base_keys - target_keys
 
     print(f"📊 תוצאות בדיקת תרגום עבור: {target_file}")
-    print(סה"כ מפתחות במקור: {len(base_keys)}")
+    print(f"סה\"כ מפתחות במקור: {len(base_keys)}")
     print(f"✅ מפתחות קיימים ביעד: {len(target_keys)}")
     
     if missing_keys:
@@ -45,8 +45,7 @@ def check_missing_translations(base_file, target_file):
         print("🎉 כל המפתחות מתורגמים כהלכה! אין שום דבר חסר.")
 
 if __name__ == "__main__":
-    # הגדר כאן את נתיבי הקבצים שלך בפרויקט
-    BASE_TRANSLATION_FILE = "locales/en.json"  # קובץ הבסיס (למשל אנגלית)
-    TARGET_TRANSLATION_FILE = "locales/he.json"  # קובץ היעד לבדיקה (למשל עברית)
+    BASE_TRANSLATION_FILE = "locales/en.json"
+    TARGET_TRANSLATION_FILE = "locales/he.json"
 
     check_missing_translations(BASE_TRANSLATION_FILE, TARGET_TRANSLATION_FILE)
