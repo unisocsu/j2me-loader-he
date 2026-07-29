@@ -132,7 +132,7 @@ public class AppInstaller {
 			newDesc = new Descriptor(srcFile, true);
 			String url = newDesc.getJarUrl();
 			if (url == null) {
-				throw new ConverterException("Jad not have " + Descriptor.MIDLET_JAR_URL);
+				throw new ConverterException("קובץ ה-Jad אינו מכיל " + Descriptor.MIDLET_JAR_URL);
 			}
 			Uri uri = Uri.parse(url);
 			String scheme = uri.getScheme();
@@ -173,13 +173,13 @@ public class AppInstaller {
 
 	private void parseKjx() throws ConverterException {
 		if (!cacheDir.exists() && !cacheDir.mkdirs()) {
-			throw new ConverterException("Can't create cache dir");
+			throw new ConverterException("לא ניתן ליצור תיקיית מטמון");
 		}
 		try (DataInputStream dis = new DataInputStream(new FileInputStream(srcFile))) {
 			byte[] magic = new byte[3];
 			dis.readFully(magic, 0, 3);
 			if (!Arrays.equals(magic, "KJX".getBytes())) {
-				throw new ConverterException("Magic KJX does not match: " + new String(magic));
+				throw new ConverterException("חתימת KJX אינה תואמת: " + new String(magic));
 			}
 
 			/*byte startJadPos = */dis.readByte();
@@ -223,11 +223,11 @@ public class AppInstaller {
 
 	private void downloadJad() throws ConverterException {
 		if (!cacheDir.exists() && !cacheDir.mkdirs()) {
-			throw new ConverterException("Can't create cache dir");
+			throw new ConverterException("לא ניתן ליצור תיקיית מטמון");
 		}
 		srcFile = new File(cacheDir, "tmp.jad");
 		String url = uri.toString();
-		Log.d(TAG, "Downloading " + url);
+		Log.d(TAG, "מוריד את " + url);
 		Exception exception;
 		HttpURLConnection connection = null;
 		try {
@@ -254,7 +254,7 @@ public class AppInstaller {
 				}
 			}
 			connection.disconnect();
-			Log.d(TAG, "Download complete");
+			Log.d(TAG, "ההורדה הושלמה");
 			return;
 		} catch (MalformedURLException e) {
 			exception = e;
@@ -268,17 +268,17 @@ public class AppInstaller {
 			}
 		}
 		deleteTemp();
-		throw new ConverterException("Can't download jad", exception);
+		throw new ConverterException("לא ניתן להוריד את קובץ ה-jad", exception);
 	}
 
 	/** Install app */
 	void install(SingleEmitter<Integer> emitter) throws ConverterException, IOException {
 		if (!cacheDir.exists() && !cacheDir.mkdirs()) {
-			throw new ConverterException("Can't create cache dir");
+			throw new ConverterException("לא ניתן ליצור תיקיית מטמון");
 		}
 		tmpDir = new File(targetDir.getParent(), ".tmp");
 		if (!tmpDir.isDirectory() && !tmpDir.mkdirs())
-			throw new ConverterException("Can't create directory: '" + targetDir + "'");
+			throw new ConverterException("לא ניתן ליצור תיקייה: '" + targetDir + "'");
 		if (srcJar == null) {
 			srcJar = new File(cacheDir, "tmp.jar");
 			downloadJar();
@@ -293,7 +293,7 @@ public class AppInstaller {
 					"--output=" + tmpDir + Config.MIDLET_DEX_FILE,
 					srcJar.getAbsolutePath()});
 		} catch (Throwable e) {
-			throw new ConverterException("Dexing error", e);
+			throw new ConverterException("שגיאת יצירת Dex", e);
 		}
 		if (manifest != null) {
 			manifest.merge(newDesc);
@@ -307,7 +307,7 @@ public class AppInstaller {
 			try {
 				ZipUtils.unzipEntry(resJar, icon, iconFile);
 			} catch (IOException e) {
-				Log.w(TAG, "Can't unzip icon: " + icon, e);
+				Log.w(TAG, "לא ניתן לחלץ אייקון: " + icon, e);
 				icon = null;
 				//noinspection ResultOfMethodCallIgnored
 				iconFile.delete();
@@ -316,7 +316,7 @@ public class AppInstaller {
 		newDesc.writeTo(new File(tmpDir, Config.MIDLET_MANIFEST_FILE));
 		FileUtils.deleteDirectory(targetDir);
 		if (!tmpDir.renameTo(targetDir)) {
-			throw new ConverterException("Can't move '" + tmpDir + "' to '" + targetDir + "'");
+			throw new ConverterException("לא ניתן להעביר את '" + tmpDir + "' אל '" + targetDir + "'");
 		}
 		String name = newDesc.getName();
 		String vendor = newDesc.getVendor();
@@ -355,7 +355,7 @@ public class AppInstaller {
 	private Descriptor loadManifest(File jar) throws IOException {
 		ZipFile zip = new ZipFile(jar);
 		FileHeader manifest = zip.getFileHeader(JarFile.MANIFEST_NAME);
-		if (manifest == null) throw new IOException("JAR not have " + JarFile.MANIFEST_NAME);
+		if (manifest == null) throw new IOException("קובץ ה-JAR אינו מכיל " + JarFile.MANIFEST_NAME);
 		try (ZipInputStream is = zip.getInputStream(manifest)) {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
 			byte[] buf = new byte[4096];
@@ -376,7 +376,7 @@ public class AppInstaller {
 			String name = jad.getName();
 			jar = new File(dir, name.substring(0, name.length() - 4) + ".jar");
 			if (!jar.exists()) {
-				throw new ConverterException("Jar-file not found for url: " + jarUrl);
+				throw new ConverterException("לא נמצא קובץ Jar עבור הכתובת: " + jarUrl);
 			}
 		}
 		srcJar = jar;
@@ -425,7 +425,7 @@ public class AppInstaller {
 			}
 		}
 		String url = jarUri.toString();
-		Log.d(TAG, "Downloading " + url);
+		Log.d(TAG, "מוריד את " + url);
 		Exception exception;
 		HttpURLConnection connection = null;
 		try {
@@ -452,7 +452,7 @@ public class AppInstaller {
 				}
 			}
 			connection.disconnect();
-			Log.d(TAG, "Download complete");
+			Log.d(TAG, "ההורדה הושלמה");
 			return;
 		} catch (MalformedURLException e) {
 			exception = e;
@@ -466,7 +466,7 @@ public class AppInstaller {
 			}
 		}
 		deleteTemp();
-		throw new ConverterException("Can't download jar", exception);
+		throw new ConverterException("לא ניתן להוריד את קובץ ה-jar", exception);
 	}
 
 	void deleteTemp() {
