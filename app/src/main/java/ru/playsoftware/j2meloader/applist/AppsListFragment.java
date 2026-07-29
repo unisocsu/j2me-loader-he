@@ -161,7 +161,7 @@ public class AppsListFragment extends ListFragment {
 	private void alertDbError(Throwable throwable) {
 		Activity activity = getActivity();
 		if (activity == null) {
-			Log.e(TAG, "Db error detected", throwable);
+			Log.e(TAG, "שגיאת מסד נתונים זוהתה", throwable);
 			return;
 		}
 		if (throwable instanceof SQLiteDiskIOException) {
