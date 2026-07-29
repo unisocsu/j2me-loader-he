@@ -353,7 +353,7 @@ public class ConfigActivity extends BaseActivity implements View.OnClickListener
 						if (info != null && info.fragment != null && info.vertex != null) {
 							infos.add(info);
 						}
-						info = new ShaderInfo(line.replaceAll("[\\[\\]]", ""), "unknown");
+						info = new ShaderInfo(line.replaceAll("[\\[\\]]", ""), "לא ידוע");
 					} else if (info != null) {
 						try {
 							info.set(line);
