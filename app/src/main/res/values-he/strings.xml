@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <string name="close">לִסְגוֹר</string>
+    <string name="exit">יְצִיאָה</string>
+    <string name="about">אוֹדוֹת</string>
+    <string name="help">עֶזרָה</string>
+    <string name="more">יוֹתֵר</string>
+    <string name="search">לְחַפֵּשׂ</string>
+    <string name="licenses">רישיונות</string>
+    <string name="profiles">פרופילים</string>
+    <string name="save_log">שמור יומן</string>
+    <string name="about_message">אפליקציה זו מאפשרת לך להפעיל J2ME אפליקציות ומשחקים באנדרואיד. הוא תומך ברוב משחקי הדו-ממד והתלת-ממד (כולל Mascot Capsule 3D).&lt;BR&gt;</string>
+    <string name="help_message">• הפעלת סינון במקרים מסוימים יכולה להפחית מאוד את הביצועים. השבת אפשרות זו אם המשחק איטי מדי.&lt;BR&gt;• ניתן לתקן בעיות בהבהוב תמונה על ידי הפעלת האפשרות "מצב עיבוד מיידי".</string>
+    <string name="about_email" translatable="false">&lt;BR&gt;Email: &lt;a href="mailto:j2me.loader@mail.ru"&gt;j2me.loader@mail.ru&lt;/a&gt;</string>
+    <string name="about_github" translatable="false">&lt;BR&gt;GitHub: &lt;a href="https://github.com/nikita36078/J2ME-Loader"&gt;github.com/nikita36078/J2ME-Loader&lt;/a&gt;</string>
+    <string name="about_emugen_wiki" translatable="false">&lt;BR&gt;EmuGen Wiki: &lt;a href="https://emulation.gametechwiki.com/index.php/J2ME_Loader"&gt;emulation.gametechwiki.com/index.php/J2ME_Loader&lt;/a&gt;</string>
+    <string name="about_4pda" translatable="false">&lt;BR&gt;4PDA: &lt;a href="https://4pda.to/forum/index.php?showtopic=824201"&gt;4pda.to/forum/index.php?showtopic=824201&lt;/a&gt;</string>
+    <string name="about_xda" translatable="false">&lt;BR&gt;XDA: &lt;a href="https://forum.xda-developers.com/android/apps-games/app-j2me-loader-t3777889"&gt;forum.xda-developers.com/android/apps-games/app-j2me-loader-t3777889&lt;/a&gt;</string>
+    <string name="about_crowdin" translatable="false">&lt;BR&gt;Crowdin(translation): &lt;a href="https://crowdin.com/project/j2me-loader"&gt;crowdin.com/project/j2me-loader&lt;/a&gt;</string>
+    <string name="about_copyright" translatable="false">&lt;BR&gt;&lt;BR&gt;Copyright 2017-2024 Nikita Shakarun</string>
+    <string name="author">מְחַבֵּר:</string>
+    <string name="version">גִרְסָה:</string>
+    <string name="no_data_for_display">אין נתונים</string>
+    <string name="message_delete">האם אתה באמת רוצה למחוק את האפליקציה הזו?</string>
+    <string name="permission_request_failed">אפליקציה זו דורשת הרשאת כתיבה באחסון</string>
+    <string name="external_storage_not_mounted">אפליקציה זו דורשת אחסון חיצוני</string>
+    <string name="create">לִיצוֹר</string>
+    <string name="alert_msg_workdir_not_exists">ספריית עבודה לא קיימת בנתיב:\n\'%1$s\'.\nהאם ברצונך ליצור אותה או לבחור אחת אחרת?</string>
+    <string name="action_context_shortcut">הוסף קיצור דרך</string>
+    <string name="action_reinstall">התקן מחדש</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="action_context_delete">לִמְחוֹק</string>
+    <string name="action_context_rename">שנה שם</string>
+    <string name="retry">לנסות שוב</string>
+    <string name="err_missing_app">האפליקציה לא נמצאה.\nאנא בדוק את זמינות %sהתקן האחסון או צור מחדש קיצור דרך.</string>
+    <string name="error_disk_io">שגיאת אחסון: בדוק מקום בדיסק</string>
+    <string name="create_apps_dir_failed">יצירת תיקיה בנתיב נכשלה:\n\'%s\'\nבחר אחר.</string>
+    <string name="change">לְשַׁנוֹת</string>
+    <string name="choose">לִבחוֹר</string>
+    <string name="warning">אַזהָרָה</string>
+    <string name="scoped_storage_warning">נתוני המשתמש שלך מאוחסנים במיקום שבו<b>will be deleted</b> when you uninstall the app:\n</string>
+    <string name="error_no_picker">אנא התקן אפליקציית בורר קבצים</string>
+
+    <string name="midlet_name"><b>Name: </b></string>
+    <string name="midlet_size"><b>Size: </b></string>
+    <string name="midlet_source"><b>Source: </b></string>
+    <string name="midlet_vendor"><b>Vendor: </b></string>
+    <string name="midlet_version"><b>Version: </b></string>
+    <string name="converting_wait">ממיר JAR...</string>
+    <string name="install">לְהַתְקִין</string>
+    <string name="install_done">היישום הותקן בהצלחה!</string>
+    <string name="install_jar_non_matched_jad">אפליקציה זו שונה מזו המתוארת ב-JAD.\nלהתעלם מJAD ולהתקין בכל זאת?</string>
+    <string name="install_jar_needed">בחר את הקובץ JAR</string>
+    <string name="invalid_resolution_not_saved">רזולוציות לא חוקיות: לא נשמרו!</string>
+    <string name="warn_install_from_net">הקובץ יוורד מהאינטרנט</string>
+    <string name="reinstall">האפליקציה כבר מותקנת.\n\nהאם ברצונך להתקין אותה מחדש?\nכל הנתונים יישמרו.</string>
+    <string name="reinstall_newest">עדכן את האפליקציה הזו לגרסה %1$s?\n\nמותקנת כעת: %2$s\nכל הנתונים יישמרו.</string>
+    <string name="reinstall_older">החלף את האפליקציה הזו בגרסה %1$s?\n\nמותקנת כעת: %2$s\nייתכן שהגרסה הישנה יותר לא תפעל כהלכה עם נתונים מוקלטים.</string>
+    <string name="loading_info">טוען מידע...</string>
+
+    <string name="START_CMD">הַתחָלָה</string>
+    <string name="CANCEL_CMD">לְבַטֵל</string>
+    <string name="CLEAR_DATA_CMD">נקה נתונים</string>
+    <string name="RESET_SETTINGS_CMD">אפס את ההגדרות</string>
+    <string name="RESET_LAYOUT_CMD">אפס את פריסת המפתחות</string>
+    <string name="load_profile">טען פרופיל</string>
+    <string name="save_profile">שמור פרופיל</string>
+    <string name="PREF_SCREEN_OPTIONS">אפשרויות מסך</string>
+    <string name="PREF_SCALE_RATIO">סוּלָם(%)</string>
+    <string name="PREF_SCALE_TO_FIT">קנה מידה להתאמה</string>
+    <string name="PREF_KEEP_ASPECT_RATIO">שמור על יחס רוחב-גובה</string>
+    <string name="PREF_FILTER">לְסַנֵן</string>
+    <string name="PREF_IMMEDIATE">מצב עיבוד מיידי</string>
+    <string name="PREF_SHOW_FPS">הצג FPS</string>
+    <string name="PREF_FORCE_FULLSCREEN">כפה מסך מלא</string>
+    <string name="PREF_LIMIT_FPS">הגבלת FPS</string>
+    <string name="PREF_FONT_OPTIONS">אפשרויות גופנים</string>
+    <string name="PREF_WIDTH">רוֹחַב</string>
+    <string name="PREF_HEIGHT">גוֹבַה</string>
+    <string name="PREF_FONT_SMALL">קָטָן</string>
+    <string name="PREF_FONT_MEDIUM">בֵּינוֹנִי</string>
+    <string name="PREF_FONT_LARGE">גָדוֹל</string>
+    <string name="PREF_FONT_SIZE_IN_SP">הערכים הם ב-Scaled Pixels</string>
+    <string name="PREF_BACKGROUND">רֶקַע</string>
+    <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">מקלדת וירטואלית</string>
+    <string name="PREF_VK_SHOW">הצג מקלדת</string>
+    <string name="PREF_VK_FEEDBACK">משוב הפטי</string>
+    <string name="PREF_VK_FORCE_OPACITY">כפה אטימות למקשים מחוץ למסך</string>
+    <string name="PREF_TOUCH_INPUT">קלט מגע</string>
+    <string name="PREF_HW_ACCELERATION">האצת HW (לא יציבה)</string>
+    <string name="pref_graphics_software">תוֹכנָה</string>
+    <string name="pref_graphics_hw_gles">האצת HW (OpenGL ES)</string>
+    <string name="pref_graphics_hw_view">האצת HW (חלון)</string>
+    <string name="pref_graphics_hw_surface">האצת HW (משטח)</string>
+    <string name="PREF_VK_BACK">כפתורים</string>
+    <string name="PREF_VK_FORE">תוויות</string>
+    <string name="PREF_VK_OUTLINE">מִתְאָר</string>
+    <string name="PREF_COLOR_HINT" translatable="false">RGB</string>
+    <string name="PREF_VK_ALPHA">אֲטִימוּת:</string>
+    <string name="PREF_VK_HIDE_DELAY">הסתר עיכוב:</string>
+    <string name="PREF_UNIT_MS">גְבֶרֶת</string>
+    <string name="PREF_VK_SEL_FORE">תוויות (P)</string>
+    <string name="PREF_VK_SEL_BACK">לחצנים (P)</string>
+    <string name="PREF_VK_KEY_SIZES">גדלי מפתח</string>
+    <string name="PREF_VK_NAV_KEYS">מַקֵל נוֹעַם:</string>
+    <string name="PREF_VK_SOFT_KEYS">מקשים רכים:</string>
+    <string name="PREF_VK_NUM_KEYS">ספרות:</string>
+    <string name="PREF_VK_FIRE_KEY">אֵשׁ:</string>
+    <string name="PREF_VK_SIZE_HINT">גוֹדֶל</string>
+    <string name="SIZE_PRESETS">הגדרות קבועות מראש</string>
+    <string name="SWAP_SIZES">החלפת גדלים</string>
+    <string name="PREF_SYS_PROPS">מאפייני מערכת</string>
+    <string name="PREF_SYS_PROPS_HINT" translatable="false">microedition.platform: Sony Ericsson C510i\nmicroedition.profiles: MIDP2.0</string>
+    <string name="PREF_ORIENTATION">כיוון מסך</string>
+    <string name="pref_orientation_default">בְּרִירַת מֶחדָל</string>
+    <string name="pref_orientation_auto">אוטומטי</string>
+    <string name="pref_orientation_port">דְיוֹקָן</string>
+    <string name="pref_orientation_land">נוֹף</string>
+    <string name="error">שְׁגִיאָה</string>
+    <string name="message_clear_data">האם אתה באמת רוצה לנקות את נתוני האפליקציה?</string>
+    <string name="PREF_VK_TYPE">סוג מקלדת</string>
+    <string name="pref_vk_type_arrows">חצים</string>
+    <string name="pref_vk_type_arrows_numbers">חצים ומספרים</string>
+    <string name="pref_vk_type_custom">מִנְהָג</string>
+    <string name="pref_vk_type_numbers">מספרים</string>
+    <string name="pref_vk_type_numbers_arrows">מספרים וחצים</string>
+    <string name="pref_vk_type_phone">טֵלֵפוֹן</string>
+    <string name="pref_vk_type_phone_arrows">טלפון (חצים)</string>
+    <string name="PREF_LAYOUT">מַעֲרָך</string>
+    <string name="PREF_SHADER_FILTER">Shader:</string>
+    <string name="identity_filter">מהיר (ללא פילטר)</string>
+    <string name="shader_tuning">Shader Tuning</string>
+    <string name="shader_setting" translatable="false">%s: %s</string>
+    <string name="reset">אִתחוּל</string>
+    <string name="pref_input_devices_title">התקני קלט</string>
+    <string name="pref_graphics_mode_title">מצב גרפי:</string>
+    <string name="PREF_FONT_ANTI_ALIASING">נגד כינוי</string>
+    <string name="pref_screen_gravity">כוח המשיכה של המסך</string>
+    <string name="pref_screen_gravity_bottom">תַחתִית</string>
+    <string name="pref_screen_gravity_center">מֶרְכָּז</string>
+    <string name="pref_screen_gravity_left">שְׁמֹאל</string>
+    <string name="pref_screen_gravity_right">יָמִינָה</string>
+    <string name="pref_screen_gravity_top">רֹאשׁ</string>
+    <string name="pref_screen_scale_type">סוג קנה מידה</string>
+    <string name="pref_screen_scale_type_fill">חלון מילוי (התעלם מיחס רוחב-גובה)</string>
+    <string name="pref_screen_scale_type_fit">התאמה לחלון</string>
+    <string name="pref_screen_scale_type_none">כפי שהוא</string>
+    <string name="pref_vk_hide_hint">נָכֶה</string>
+    <string name="unlimited">בִּלתִי מוּגבָּל</string>
+    <string name="parallel_screen_redrawing">ציור מחדש של מסך מקביל</string>
+    <string name="saved">נשמר</string>
+
+    <string name="FORCE_CLOSE_CONFIRMATION">סגירה בכוח של האפליקציה עלולה לגרום לאובדן נתונים או אפילו לשבור אותו לחלוטין!\nלהמשיך?</string>
+    <string name="CONFIRMATION_REQUIRED">נדרש אישור</string>
+    <string name="select_dialog_title">בחר MIDlet</string>
+    <string name="crash_dialog_message">האם ברצונך לשלוח דוח שגיאה למפתח?</string>
+    <string name="crash_dialog_title">זוהתה שגיאה</string>
+    <string name="report_crash">לִשְׁלוֹחַ</string>
+    <string name="layout_edit_finished">מצב העריכה הסתיים</string>
+    <string name="layout_edit_finish">סיים את מצב העריכה</string>
+    <string name="layout_edit_mode">מצב עריכה של פריסת מפתח</string>
+    <string name="layout_scale_mode">מצב שינוי גודל של פריסת מפתח</string>
+    <string name="layout_switch">החלף פריסת מפתח</string>
+    <string name="hide_buttons">הסתר כפתורים</string>
+    <string name="take_screenshot">צלם צילום מסך</string>
+    <string name="screenshot_saved">צילום מסך נשמר ב</string>
+    <string name="log_saved">היומן נשמר</string>
+    <string name="action_keyboard_ime">מקלדת (IME)</string>
+    <string name="action_lock_orientation">סיבוב מסך נעילה</string>
+    <string name="pref_vk_save_alert">מקלדת מותאמת אישית תוחלף ב- current\nשמור?</string>
+    <string name="opt_save_screen_params">לשמור פרמטרים של מסך</string>
+    <string name="cmd_menu">תַפרִיט</string>
+    <string name="dismiss">לְפַטֵר</string>
+    <string name="show">לְהַצִיג</string>
+
+    <string name="pref_theme_auto_battery">אוטומטי, על ידי חיסכון בסוללה</string>
+    <string name="pref_theme_auto_time">אוטומטי, לפי שעה ביום</string>
+    <string name="pref_theme_default" translatable="false">light</string>
+    <string name="pref_theme_light">אוֹר</string>
+    <string name="pref_theme_night">כֵּהֶה</string>
+    <string name="pref_theme_system">עקוב אחר הגדרות המערכת</string>
+    <string name="pref_theme_title">נוֹשֵׂא</string>
+    <string name="pref_requires_restart_summary">דורש הפעלה מחדש</string>
+    <string name="pref_enable_actionbar_title">הפעל את ActionBar</string>
+    <string name="pref_enable_actionbar_summary">ביישומים במסך מלא</string>
+    <string name="pref_black_background_title">רקע שחור</string>
+    <string name="pref_black_background_summary">לנושא האפל</string>
+    <string name="pref_enable_statusbar_title">הפעל את שורת המצב</string>
+    <string name="pref_add_cutout_area_title">הוסף אזור חיתוך</string>
+    <string name="pref_wakelock_title">השאר את המסך דולק</string>
+    <string name="pref_vibration_title">אפשר רטט</string>
+    <string name="pref_button_shape_title">צורת כפתור</string>
+    <string name="pref_button_shape_oval">סְגַלגַל</string>
+    <string name="pref_button_shape_rect">מַלבֵּן</string>
+    <string name="pref_button_shape_round">מלבן מעוגל</string>
+    <string name="pref_app_sort_title">סדר מיון אפליקציות</string>
+    <string name="pref_app_sort_name">שֵׁם</string>
+    <string name="pref_app_sort_date">תַאֲרִיך</string>
+    <string name="pref_app_sort_vendor">מוֹכֵר</string>
+    <string name="pref_map_keys">מיפויי מפתח</string>
+    <string name="pref_encoding_title">הַצפָּנָה</string>
+    <string name="pref_default_settings">הגדרות ברירת מחדל</string>
+    <string name="pref_emulator_dir">ספריית עבודה</string>
+    <string name="pref_screenshot_summary">השבת קנה מידה וסינון עבור צילומי מסך</string>
+    <string name="pref_screenshot_title">צילום מסך גולמי</string>
+    <string name="pref_category_experimental">אפשרויות ניסיוניות/זמניות</string>
+    <string name="pref_mascot_summary">הצג הודעה בעת השימוש</string>
+    <string name="pref_mascot_title">זיהוי קפסולה תלת מימדית</string>
+
+    <string name="_RESOLUTION_SEPARATOR" translatable="false">x</string>
+    <string name="_FONT_SEPARATOR" translatable="false">-</string>
+    <string name="_MINUS_ONE" translatable="false">-1</string>
+
+    <string name="virtual_key_left_soft" translatable="false">L</string>
+    <string name="virtual_key_right_soft" translatable="false">R</string>
+    <string name="virtual_key_menu" translatable="false">M</string>
+    <string name="virtual_key_d" translatable="false">D</string>
+    <string name="virtual_key_c" translatable="false">C</string>
+    <string name="virtual_key_left" translatable="false">←</string>
+    <string name="virtual_key_right" translatable="false">→</string>
+    <string name="virtual_key_up" translatable="false">↑</string>
+    <string name="virtual_key_down" translatable="false">↓</string>
+    <string name="virtual_key_f" translatable="false">F</string>
+    <string name="virtual_key_a" translatable="false">A</string>
+    <string name="virtual_key_b" translatable="false">B</string>
+    <string name="virtual_key_1" translatable="false">1</string>
+    <string name="virtual_key_2" translatable="false">2</string>
+    <string name="virtual_key_3" translatable="false">3</string>
+    <string name="virtual_key_4" translatable="false">4</string>
+    <string name="virtual_key_5" translatable="false">5</string>
+    <string name="virtual_key_6" translatable="false">6</string>
+    <string name="virtual_key_7" translatable="false">7</string>
+    <string name="virtual_key_8" translatable="false">8</string>
+    <string name="virtual_key_9" translatable="false">9</string>
+    <string name="virtual_key_0" translatable="false">0</string>
+    <string name="virtual_key_star" translatable="false">*</string>
+    <string name="virtual_key_pound" translatable="false">#</string>
+    <string name="mapping_dialog_message">מיפוי נוכחי: %1$s</string>
+    <string name="mapping_dialog_key_not_specified">לא צוין</string>
+    <string name="mapping_dialog_title">הקש על מקש</string>
+    <string name="reset_mapping">אִתחוּל</string>
+    <string name="alert_map_menu">מקש תפריט (M) אינו מוקצה!\nזה עלול להפוך את הגישה לאפשרויות האמולטור בלתי אפשרית</string>
+    <string name="save">לְהַצִיל</string>
+
+    <string name="error_name">הזן שם!</string>
+    <string name="set_as_default">הגדר כברירת מחדל</string>
+    <string name="edit">לַעֲרוֹך</string>
+    <string name="add">לְהוֹסִיף</string>
+    <string name="add_profile_description">צור פרופיל חדש</string>
+    <string name="enter_name">הזן שם</string>
+    <string name="enter_new_name">הזן שם חדש</string>
+    <string name="set_default_profile_description">בחר פרופיל זה כהגדרות סטנדרטיות עבור כל האפליקציות שיותקנו מאוחר יותר</string>
+    <string name="error_name_exists">כבר קיים, הזן שם אחר</string>
+    <string name="default_label">"%s (ברירת מחדל)"</string>
+    <string name="not_saved_exists">כבר קיים</string>
+    <string name="alert_rewrite_profile">פרופיל בשם \"%1$s\" כבר קיים.\nהאם ברצונך להחליף אותו?</string>
+</resources>
