@@ -39,55 +39,81 @@ def restore_text(text, replacements):
         text = text.replace(token, original)
     return text
 
-def translate_xml(input_path, output_path):
-    # שימוש בקוד 'iw' המעודכן עבור עברית 🌍✨
-    translator = GoogleTranslator(source='auto', target='iw')
-    
-    tree = ET.parse(input_path)
-    root = tree.getroot()
+def translate_node(elem, translator):
+    """מתרגם אלמנט XML מדפיס את המקור והתוצאה ל-Logs 🔤📢"""
+    if elem.attrib.get('translatable') == 'false':
+        return
 
-    print(f"🚀 מתחיל לתרגם את הקובץ: {input_path}")
+    if elem.text and elem.text.strip():
+        original_text = elem.text
+        protected_text, replacements = protect_text(original_text)
+        try:
+            translated = translator.translate(protected_text)
+            restored = restore_text(translated, replacements)
+            elem.text = restored
+            
+            # הדפסת התהליך ללוג של GitHub Actions 🖥️✨
+            print(f"  ├─ 🔤 מקור:   '{original_text.strip()}'")
+            print(f"  └─ 🎯 תרגום: '{restored}'\n")
+        except Exception as e:
+            print(f"⚠️ שגיאה בתרגום הטקסט '{original_text}': {e}\n")
+
+def translate_xml_file(input_path, output_path, translator):
+    """סורק ומתרגם קובץ XML יחיד מכל סוג (strings, arrays, plurals) 📄"""
+    try:
+        tree = ET.parse(input_path)
+        root = tree.getroot()
+    except Exception as e:
+        print(f"⚠️ לא ניתן לפענח את הקובץ {input_path}: {e}")
+        return
+
+    filename = os.path.basename(input_path)
+    print(f"==================================================")
+    print(f"🚀 מתחיל לתרגם את הקובץ: {filename}")
+    print(f"==================================================")
 
     # תרגום מחרוזות רגילות <string>
     for elem in root.findall('string'):
-        if elem.attrib.get('translatable') == 'false':
-            continue
-
-        if elem.text and elem.text.strip():
-            protected_text, replacements = protect_text(elem.text)
-            try:
-                translated = translator.translate(protected_text)
-                elem.text = restore_text(translated, replacements)
-            except Exception as e:
-                print(f"⚠️ שגיאה בתרגום המחרוזת '{elem.attrib.get('name')}': {e}")
+        translate_node(elem, translator)
 
     # תרגום מערכים <string-array>
     for array_elem in root.findall('string-array'):
         if array_elem.attrib.get('translatable') == 'false':
             continue
-            
         for item in array_elem.findall('item'):
-            if item.text and item.text.strip():
-                protected_text, replacements = protect_text(item.text)
-                try:
-                    translated = translator.translate(protected_text)
-                    item.text = restore_text(translated, replacements)
-                except Exception as e:
-                    print(f"⚠️ שגיאה בתרגום פריט במערך: {e}")
+            translate_node(item, translator)
 
-    # שמירת הקובץ המתורגם בתיקייה
+    # תרגום ביטויי ריבוי <plurals>
+    for plurals_elem in root.findall('plurals'):
+        if plurals_elem.attrib.get('translatable') == 'false':
+            continue
+        for item in plurals_elem.findall('item'):
+            translate_node(item, translator)
+
+    # שמירת הקובץ המתורגם בתיקיית היעד values-he
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     tree.write(output_path, encoding='utf-8', xml_declaration=True)
-    print(f"✅ התרגום הושלם בהצלחה! הקובץ שנשמר: {output_path}")
+    print(f"✅ הקובץ {filename} תורגם ונשמר בהצלחה בנתיב: {output_path}\n")
+
+def main():
+    translator = GoogleTranslator(source='auto', target='iw')
+    
+    base_dir = "app/src/main/res"
+    values_dir = os.path.join(base_dir, "values")
+    target_dir = os.path.join(base_dir, "values-he")
+
+    if not os.path.exists(values_dir):
+        print(f"❌ התיקייה לא נמצאה: {values_dir}")
+        return
+
+    # סריקת כל קובצי ה-XML בתיקיית values 🗂️
+    xml_files = [f for f in os.listdir(values_dir) if f.endswith('.xml')]
+    print(f"🔍 נמצאו {len(xml_files)} קובצי XML בתיקיית values.\n")
+
+    for filename in xml_files:
+        input_file = os.path.join(values_dir, filename)
+        output_file = os.path.join(target_dir, filename)
+        translate_xml_file(input_file, output_file, translator)
 
 if __name__ == "__main__":
-    # הגדרת נתיבי הקבצים בפרויקט 📁
-    base_dir = "app/src/main/res"
-    
-    input_strings = os.path.join(base_dir, "values", "strings.xml")
-    output_strings = os.path.join(base_dir, "values-he", "strings.xml")
-    
-    if os.path.exists(input_strings):
-        translate_xml(input_strings, output_strings)
-    else:
-        print(f"❌ הקובץ לא נמצא: {input_strings}")
+    main()
