@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build Project & Upload Artifact ⚙️📦
+    name: Build Project & Upload All APKs ⚙️📦
     runs-on: ubuntu-latest
 
     steps:
@@ -27,11 +27,11 @@ jobs:
     - name: Grant execute permission for Gradle wrapper 🔐
       run: chmod +x gradlew
 
-    - name: Build Debug APK with Gradle 🛠️
+    - name: Build APKs with Gradle 🛠️
       run: ./gradlew assembleDebug
 
-    - name: Upload APK Artifact 📦✨
+    - name: Upload All APK Artifacts 📦✨
       uses: actions/upload-artifact@v4
       with:
-        name: app-debug-apk
-        path: app/build/outputs/apk/debug/app-debug.apk
+        name: j2meloader-all-apks
+        path: app/build/outputs/apk/**/*.apk
