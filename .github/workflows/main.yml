@@ -5,6 +5,10 @@ on:
     branches: [ main, master ] # מורץ אוטומטית בכל push 🚀
   workflow_dispatch: # אפשרות להפעלה ידנית 🖱️
 
+# הרשאה ל-GitHub Action לבצע commit ו-push לריפו 🔑
+permissions:
+  contents: write
+
 jobs:
   translate:
     runs-on: ubuntu-latest
@@ -23,11 +27,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install deep-translator
 
-      - name: Run translation script from tools directory 🚀
+      - name: Run translation script 🚀
         run: python tools/translate.py
 
-      - name: Upload translated files 📤
-        uses: actions/upload-artifact@v4
+      - name: Commit and push translated files 📝
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          name: values-he-translated
-          path: app/src/main/res/values-he/
+          commit_message: "Auto-translated resources to Hebrew 🌍 [skip ci]"
+          file_pattern: 'app/src/main/res/values-he/*.xml'
