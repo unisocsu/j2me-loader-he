@@ -209,7 +209,7 @@ public class ShaderInfo implements Comparable<ShaderInfo>, Parcelable {
 	@NonNull
 	@Override
 	public String toString() {
-		return name == null ? "unnamed" : name;
+		return name == null ? "ללא שם" : name;
 	}
 
 	@Override
