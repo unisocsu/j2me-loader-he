@@ -111,8 +111,7 @@ public class InstallerDialog extends DialogFragment {
 		binding = DialogInstallerBinding.inflate(LayoutInflater.from(getContext()));
 		mDialog = new AlertDialog.Builder(requireActivity(), getTheme())
 				.setIcon(R.mipmap.ic_launcher)
-				.setView(binding.getRoot())
-				.setTitle("MIDlet installer")
+				.setTitle("מתקין יישומי MIDlet")
 				.setMessage("")
 				.setCancelable(false)
 				.setPositiveButton(R.string.install, null)
@@ -309,7 +308,7 @@ public class InstallerDialog extends DialogFragment {
 				alertSelectJar(v -> openFileLauncher.launch(null));
 				return;
 			default:
-				throw new IllegalStateException("Unexpected value: " + status);
+				throw new IllegalStateException("ערך בלתי צפוי: " + status);
 		}
 		if (installer.getJar() == null) {
 			message.append('\n').append(getString(R.string.warn_install_from_net));
