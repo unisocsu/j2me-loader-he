@@ -1,5 +1,5 @@
 import os
-import google.generativeai as genai
+from google import genai
 
 def main():
     api_key = "AQ.Ab8RN6KmtcwtPXbGPInjwFthSpD3o075waYKOyj-DHygFJrKMQ"
@@ -13,10 +13,10 @@ def main():
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך Gemini API... 🤖")
+    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך Gemini API החדש... 🤖")
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    # אתחול הלקוח החדש של גוגל עם המפתח שלך
+    client = genai.Client(api_key=api_key)
 
     prompt = f"""
     אתה עוזר פיתוח מומחה. לפניך תוכן של קובץ מחרוזות מאפליקציית אנדרואיד.
@@ -28,7 +28,11 @@ def main():
     """
 
     try:
-        response = model.generate_content(prompt)
+        # שימוש במודל החינמי והמעודכן Gemini 2.5 Flash או Gemini 2.0 Flash
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt,
+        )
         translated_content = response.text
         
         if translated_content.startswith("```xml"):
