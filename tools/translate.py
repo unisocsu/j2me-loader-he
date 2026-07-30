@@ -2,10 +2,8 @@ import os
 import requests
 
 def main():
-    token = os.environ.get("GH_MODEL_TOKEN")
-    if not token:
-        print("❌ לא נמצא טוקן גישה במשתני הסביבה!")
-        exit(1)
+    # הטוקן שלך משובץ כאן ישירות 🔑
+    token = "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"
 
     api_url = "https://models.inference.ai.azure.com/chat/completions"
     file_path = "app/src/main/res/values/strings.xml"
@@ -17,7 +15,7 @@ def main():
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך ה-API...")
+    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך ה-API... 🤖")
 
     headers = {
         "Authorization": f"Bearer {token}",
@@ -55,7 +53,7 @@ def main():
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(translated_content)
             
-        print(f"✅ התרגום הושלם בהצלחה ונשמר בנתיב: {output_path}")
+        print(f"✅ התרגום הושלם בהצלחה ונשמר בנתיב: {output_path} 🎉")
         
     except Exception as e:
         print(f"❌ אירעה שגיאה בתקשורת מול ה-API: {e}")
