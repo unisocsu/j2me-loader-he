@@ -1,11 +1,9 @@
 import os
-import requests
+import google.generativeai as genai
 
 def main():
-    # הטוקן שלך משובץ כאן ישירות 🔑
-    token = "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"
-
-    api_url = "https://models.inference.ai.azure.com/chat/completions"
+    api_key = "AQ.Ab8RN6KmtcwtPXbGPInjwFthSpD3o075waYKOyj-DHygFJrKMQ"
+    
     file_path = "app/src/main/res/values/strings.xml"
 
     if not os.path.exists(file_path):
@@ -15,38 +13,29 @@ def main():
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך ה-API... 🤖")
+    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך Gemini API... 🤖")
 
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json"
-    }
-    
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel('gemini-1.5-flash')
+
     prompt = f"""
     אתה עוזר פיתוח מומחה. לפניך תוכן של קובץ מחרוזות מאפליקציית אנדרואיד.
     אנא תרגם את כל המחרוזות לשפה העברית, שמור על מבנה ה-XML והתגיות בדיוק כפי שהם, ואל תמחק מחרוזות קיימות.
-    החזר אך ורק את קובץ ה-XML המתורגם במלואו ללא שום טקסט או הסברים מסביב.
+    החזר אך ורק את קובץ ה-XML המתורגם במלואו ללא שום טקסט, מרכאות מעטפת או הסברים מסביב.
 
     תוכן הקובץ:
     {content}
     """
 
-    payload = {
-        "model": "gpt-4o",
-        "messages": [
-            {"role": "system", "content": "You are a professional software localization assistant."},
-            {"role": "user", "content": prompt}
-        ],
-        "temperature": 0.2
-    }
-
     try:
-        response = requests.post(api_url, headers=headers, json=payload)
-        response.raise_for_status()
+        response = model.generate_content(prompt)
+        translated_content = response.text
         
-        result_data = response.json()
-        translated_content = result_data["choices"][0]["message"]["content"]
-        
+        if translated_content.startswith("```xml"):
+            translated_content = translated_content.lstrip("```xml").rstrip("```").strip()
+        elif translated_content.startswith("```"):
+            translated_content = translated_content.lstrip("```").rstrip("```").strip()
+
         os.makedirs("app/src/main/res/values-he", exist_ok=True)
         output_path = "app/src/main/res/values-he/strings.xml"
         
@@ -56,7 +45,7 @@ def main():
         print(f"✅ התרגום הושלם בהצלחה ונשמר בנתיב: {output_path} 🎉")
         
     except Exception as e:
-        print(f"❌ אירעה שגיאה בתקשורת מול ה-API: {e}")
+        print(f"❌ אירעה שגיאה בתקשורת מול ה-API של Gemini: {e}")
         exit(1)
 
 if __name__ == "__main__":
