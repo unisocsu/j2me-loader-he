@@ -2,6 +2,7 @@ import os
 from google import genai
 
 def main():
+    # הדבק כאן את מפתח ה-API הנכון שמתחיל ב-AIzaSy... 🔑
     api_key = "AQ.Ab8RN6KmtcwtPXbGPInjwFthSpD3o075waYKOyj-DHygFJrKMQ"
     
     file_path = "app/src/main/res/values/strings.xml"
@@ -13,9 +14,8 @@ def main():
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך Gemini API החדש... 🤖")
+    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך Gemini API... 🤖")
 
-    # אתחול הלקוח החדש של גוגל עם המפתח שלך
     client = genai.Client(api_key=api_key)
 
     prompt = f"""
@@ -28,7 +28,6 @@ def main():
     """
 
     try:
-        # שימוש במודל החינמי והמעודכן Gemini 2.5 Flash או Gemini 2.0 Flash
         response = client.models.generate_content(
             model='gemini-2.5-flash',
             contents=prompt,
