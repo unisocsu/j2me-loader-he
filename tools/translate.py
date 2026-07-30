@@ -1,67 +1,65 @@
 import os
-import re
+import requests
 
-# הגדרת סיומות קבצי הקוד שנרצה לסרוק
-CODE_EXTENSIONS = {'.java', '.kt', '.cpp', '.c', '.h', '.hpp'}
+def main():
+    token = os.environ.get("GH_MODEL_TOKEN")
+    if not token:
+        print("❌ לא נמצא טוקן גישה במשתני הסביבה!")
+        exit(1)
 
-# ביטוי רגולרי לאיתור מחרוזות טקסט בתוך מרכאות כפולות ברוב השפות
-STRING_LITERAL_REGEX = re.compile(r'"([^"\\]*(?:\\.[^"\\]*)*)"')
+    api_url = "https://models.inference.ai.azure.com/chat/completions"
+    file_path = "app/src/main/res/values/strings.xml"
 
-def should_skip_dir(dirname):
-    """דילוג על תיקיות בנייה או מערכת מיותרות"""
-    skipped = {'build', '.git', '.gradle', '.idea', 'node_modules', 'libs', 'prebuilt'}
-    return dirname in skipped or dirname.startswith('.')
+    if not os.path.exists(file_path):
+        print(f"❌ קובץ המקור לא נמצא בנתיב: {file_path}")
+        exit(1)
 
-def analyze_code_file(file_path):
-    """סורק קובץ קוד בודד ומחזיר רשימת מחרוזות טקסט ש נמצאו בו"""
-    found_strings = []
-    try:
-        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-            for line_num, line in enumerate(f, 1):
-                # דילוג על שורות הערה פשוטות (אופציונלי)
-                stripped = line.strip()
-                if stripped.startswith('//') or stripped.startswith('*') or stripped.startswith('/*'):
-                    continue
-                
-                matches = STRING_LITERAL_REGEX.findall(line)
-                for text in matches:
-                    # סינון מחרוזות ריקות, תווים בודדים, או מילות מפתח טכניות נפוצות
-                    if len(text.strip()) > 1 and not text.startswith(('http://', 'https://', 'android.', 'java.', 'com.', 'Ljava', 'V', 'I', 'Z', '[')):
-                        found_strings.append((line_num, text))
-    except Exception as e:
-        print(f"⚠️ שגיאה בקריאת הקובץ {file_path}: {e}")
-        
-    return found_strings
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
 
-def scan_project_source_files():
-    """סורק את כל הפרויקט מקצה לקצה ומציג טקסטים בקוד שדורשים בדיקה/תרגום"""
-    project_root = '.'
-    scanned_files_count = 0
-    total_strings_found = 0
+    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך ה-API...")
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json"
+    }
     
-    print("🔎 מתחיל בסריקת קבצי הקוד בפרויקט (Java, Kotlin, C, C++)... 🚀\n")
+    prompt = f"""
+    אתה עוזר פיתוח מומחה. לפניך תוכן של קובץ מחרוזות מאפליקציית אנדרואיד.
+    אנא תרגם את כל המחרוזות לשפה העברית, שמור על מבנה ה-XML והתגיות בדיוק כפי שהם, ואל תמחק מחרוזות קיימות.
+    החזר אך ורק את קובץ ה-XML המתורגם במלואו ללא שום טקסט או הסברים מסביב.
 
-    for root, dirs, files in os.walk(project_root):
-        # סינון תיקיות
-        dirs[:] = [d for d in dirs if not should_skip_dir(d)]
+    תוכן הקובץ:
+    {content}
+    """
+
+    payload = {
+        "model": "gpt-4o",
+        "messages": [
+            {"role": "system", "content": "You are a professional software localization assistant."},
+            {"role": "user", "content": prompt}
+        ],
+        "temperature": 0.2
+    }
+
+    try:
+        response = requests.post(api_url, headers=headers, json=payload)
+        response.raise_for_status()
         
-        for file in files:
-            ext = os.path.splitext(file)[1].lower()
-            if ext in CODE_EXTENSIONS:
-                file_path = os.path.join(root, file)
-                scanned_files_count += 1
-                
-                strings = analyze_code_file(file_path)
-                if strings:
-                    print(f"📄 קובץ: {file_path}")
-                    for line_num, text in strings:
-                        print(f"   🔹 שורה {line_num}: \"{text}\"")
-                        total_strings_found += 1
-                    print("-" * 50)
-
-    print(f"\n📊 סיכום סריקה:")
-    print(f"📁 סך הכל קבצי קוד שנסרקו: {scanned_files_count}")
-    print(f"⚠️ נמצאו בסך הכל {total_strings_found} מחרוזות טקסט קשיחות בקוד שדורשות בדיקה או תרגום.")
+        result_data = response.json()
+        translated_content = result_data["choices"][0]["message"]["content"]
+        
+        os.makedirs("app/src/main/res/values-he", exist_ok=True)
+        output_path = "app/src/main/res/values-he/strings.xml"
+        
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(translated_content)
+            
+        print(f"✅ התרגום הושלם בהצלחה ונשמר בנתיב: {output_path}")
+        
+    except Exception as e:
+        print(f"❌ אירעה שגיאה בתקשורת מול ה-API: {e}")
+        exit(1)
 
 if __name__ == "__main__":
-    scan_project_source_files()
+    main()
