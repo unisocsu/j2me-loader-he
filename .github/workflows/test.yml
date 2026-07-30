@@ -1,4 +1,4 @@
-name: AI Translation CI 🌍🤖
+name: Gemini AI Translation CI 🌍🤖
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   translate:
-    name: Run Translation Script 🐍⚙️
+    name: Run Gemini Translation Script 🐍⚙️
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
         python-version: '3.10'
 
     - name: Install Dependencies 📦
-      run: pip install requests
+      run: pip install google-generativeai
 
     - name: Run Python Script from Tools 🚀
       run: python tools/translate.py
