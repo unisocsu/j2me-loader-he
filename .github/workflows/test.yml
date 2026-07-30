@@ -23,8 +23,6 @@ jobs:
       run: pip install requests
 
     - name: Run Python Script from Tools 🚀
-      env:
-        GH_MODEL_TOKEN: ${{ secrets.GH_MODEL_TOKEN }}
       run: python tools/translate.py
 
     - name: Upload Translated XML Artifact 📦✨
