@@ -1,9 +1,9 @@
 import os
-from google import genai
+import requests
 
 def main():
-    # הדבק כאן את מפתח ה-API הנכון שמתחיל ב-AIzaSy... 🔑
-    api_key = "AQ.Ab8RN6KmtcwtPXbGPInjwFthSpD3o075waYKOyj-DHygFJrKMQ"
+    # הטוקן שלך מבוסס ה-AQ 🔑
+    token = "AQ.Ab8RN6IsTBj1dL9wG1cTJIaWzTigqshC3m8VnNtCamOXg_8mwQ"
     
     file_path = "app/src/main/res/values/strings.xml"
 
@@ -14,9 +14,15 @@ def main():
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך Gemini API... 🤖")
+    print("⏳ שולח את קובץ ה-strings.xml לתרגום דרך ה-API עם טוקן OAuth... 🤖")
 
-    client = genai.Client(api_key=api_key)
+    # כתובת ה-API המעודכנת למודלי Gemini
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}"
+    }
 
     prompt = f"""
     אתה עוזר פיתוח מומחה. לפניך תוכן של קובץ מחרוזות מאפליקציית אנדרואיד.
@@ -27,13 +33,28 @@ def main():
     {content}
     """
 
+    payload = {
+        "contents": [
+            {
+                "parts": [
+                    {
+                        "text": prompt
+                    }
+                ]
+            }
+        ]
+    }
+
     try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-        )
-        translated_content = response.text
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()
         
+        result_data = response.json()
+        
+        # חילוץ התשובה מתוך מבנה ה-JSON של ה-API
+        translated_content = result_data["candidates"][0]["content"]["parts"][0]["text"]
+        
+        # ניקוי מעטפות קוד במידה והמודל הוסיף אותן בטעות
         if translated_content.startswith("```xml"):
             translated_content = translated_content.lstrip("```xml").rstrip("```").strip()
         elif translated_content.startswith("```"):
@@ -48,7 +69,9 @@ def main():
         print(f"✅ התרגום הושלם בהצלחה ונשמר בנתיב: {output_path} 🎉")
         
     except Exception as e:
-        print(f"❌ אירעה שגיאה בתקשורת מול ה-API של Gemini: {e}")
+        print(f"❌ אירעה שגיאה בתקשורת מול ה-API: {e}")
+        if 'response' in locals():
+            print(f"פרטי שגיאה מהשרת: {response.text}")
         exit(1)
 
 if __name__ == "__main__":
