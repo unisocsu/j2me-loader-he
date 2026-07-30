@@ -1,1 +1,34 @@
+name: AI Translation CI 🌍🤖
 
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  translate:
+    name: Run Translation Script 🐍⚙️
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code 📂
+      uses: actions/checkout@v4
+
+    - name: Set up Python 🐍
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies 📦
+      run: pip install requests
+
+    - name: Run Python Script from Tools 🚀
+      env:
+        GH_MODEL_TOKEN: ${{ secrets.GH_MODEL_TOKEN }}
+      run: python tools/translate.py
+
+    - name: Upload Translated XML Artifact 📦✨
+      uses: actions/upload-artifact@v4
+      with:
+        name: hebrew-strings-xml
+        path: app/src/main/res/values-he/strings.xml
